@@ -12,7 +12,7 @@ class CalendarsController < ApplicationController
     redirect_to action: :index  # usersコントローラのindexアクションへリダイレクト
   end
 
-  private　# クラス外から呼び出すことのできないメソッド
+  private  # クラス外から呼び出すことのできないメソッド
 
   def plan_params
     params.require(:calendars).permit(:date, :plan) 
@@ -28,14 +28,14 @@ class CalendarsController < ApplicationController
 
     @week_days = []
 
-    plans = Plan.where(date: @todays_get_date..@todays_get_date + 6)
+    plans = Plan.where(date: @todays_date..@todays_date + 6)
 
     7.times do |x| # 7 から１つずつ順番に要素を取り出し変数 x に代入
       today_plans = []
       plans.each do |plan| # plans から１つずつ順番に要素を取り出し変数 plan に代入
         today_plans.push(plan.plan) if plan.date == @todays_get_date + x
       end
-      days = {month:  (@todays_get_date + x).month, date:  (@todays_get_date+x).day, plans: today_plans}
+      days = {month:  (@todays_date + x).month, date:  (@todays_date+x).day, plans: today_plans}
       @week_days.push(days)
     end
 
